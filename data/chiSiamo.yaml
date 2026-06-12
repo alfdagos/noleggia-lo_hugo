@@ -1,0 +1,12 @@
+items:
+  - icon: "🚚"
+    title: "Furgoni Cargo"
+    desc: "Veicoli capienti e ben tenuti per ogni esigenza."
+
+  - icon: "📍"
+    title: "A Brecciarola di Chieti"
+    desc: "Ritiro e consegna comodi, vicino a te."
+
+  - icon: "📞"
+    title: "Prenotazione Diretta"
+    desc: "Chiama e prenota senza intermediari."

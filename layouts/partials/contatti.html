@@ -1,0 +1,42 @@
+<section id="contatti" class="nl-contatti" aria-label="Contatti">
+  <div class="nl-contatti__inner">
+
+    <div class="nl-section-label nl-fade-up">Contatti</div>
+    <h2 class="nl-section-title nl-fade-up">Prenota o chiedi informazioni.</h2>
+
+    <a href="{{ .Site.Params.tel | safeURL }}" class="nl-phone-link nl-fade-up">
+      {{ .Site.Params.phone }}
+    </a>
+
+    <p class="nl-contatti__sub nl-fade-up">
+      Siamo disponibili per rispondere a chiamate e messaggi WhatsApp.
+    </p>
+
+    <div class="nl-contatti__ctas nl-fade-up">
+      <a href="{{ .Site.Params.tel | safeURL }}" class="nl-btn nl-btn--orange nl-btn--lg">
+        📞 Chiama ora
+      </a>
+      <a
+        href="{{ .Site.Params.whatsapp }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nl-btn nl-btn--outline-navy nl-btn--lg"
+      >
+        💬 Scrivici su WhatsApp
+      </a>
+    </div>
+
+    <p class="nl-contatti__address nl-fade-up">📍 Brecciarola di Chieti, Abruzzo</p>
+
+    <div class="nl-map-wrap nl-fade-up">
+      <iframe
+        title="Mappa Brecciarola di Chieti"
+        src="https://www.google.com/maps?q=Brecciarola,+Chieti,+Italy&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        aria-label="Google Maps — Brecciarola di Chieti"
+      ></iframe>
+    </div>
+
+  </div>
+</section>

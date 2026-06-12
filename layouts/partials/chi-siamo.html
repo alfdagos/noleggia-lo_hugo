@@ -1,0 +1,28 @@
+<section id="chi-siamo" class="nl-chi-siamo" aria-label="Chi siamo">
+  <div class="nl-container">
+
+    <div class="nl-section-header">
+      <div class="nl-section-label nl-fade-up">Chi Siamo</div>
+      <h2 class="nl-section-title nl-fade-up">
+        Nati a Brecciarola, al servizio di tutto il territorio.
+      </h2>
+      <p class="nl-chi-siamo__body nl-fade-up">
+        NOLEGGIA-LO è un nuovo servizio di noleggio furgoni cargo con base a Brecciarola di Chieti.
+        Ci rivolgiamo ad artigiani, piccole imprese, privati e chiunque abbia bisogno di un veicolo
+        capiente per un giorno, un weekend o più. Niente burocrazia complicata: solo furgoni in
+        ordine, disponibili e pronti.
+      </p>
+    </div>
+
+    <div class="nl-cards" role="list">
+      {{ range .Site.Data.chiSiamo.items }}
+      <div class="nl-card nl-fade-up" role="listitem">
+        <div class="nl-card__icon" aria-hidden="true">{{ .icon }}</div>
+        <h3 class="nl-card__title">{{ .title }}</h3>
+        <p class="nl-card__desc">{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+
+  </div>
+</section>

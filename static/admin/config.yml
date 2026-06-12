@@ -1,0 +1,67 @@
+backend:
+  name: github
+  repo: alfdagos/noleggia-lo_hugo
+  branch: main
+
+media_folder: static/images
+public_folder: /images
+
+locale: it
+
+collections:
+  - name: homepage
+    label: Homepage
+    files:
+      - name: hero
+        label: Titolo e descrizione
+        file: content/_index.md
+        fields:
+          - { name: title, label: Titolo, widget: string }
+          - { name: description, label: Descrizione meta, widget: text }
+
+  - name: chi_siamo
+    label: Chi Siamo
+    files:
+      - name: carte
+        label: Carte Chi Siamo
+        file: data/chiSiamo.yaml
+        fields:
+          - name: items
+            label: Carte
+            widget: list
+            fields:
+              - { name: icon, label: Icona (emoji), widget: string }
+              - { name: title, label: Titolo, widget: string }
+              - { name: desc, label: Descrizione, widget: text }
+
+  - name: perche
+    label: Perché Sceglierci
+    files:
+      - name: motivi
+        label: Motivi
+        file: data/perche.yaml
+        fields:
+          - name: items
+            label: Motivi
+            widget: list
+            fields:
+              - { name: title, label: Titolo, widget: string }
+              - { name: desc, label: Descrizione, widget: text }
+
+  - name: flotta
+    label: Flotta
+    files:
+      - name: furgoni
+        label: Furgoni
+        file: data/vans.yaml
+        fields:
+          - name: items
+            label: Furgoni
+            widget: list
+            fields:
+              - { name: name, label: Nome, widget: string }
+              - { name: image, label: Immagine, widget: image }
+              - name: specs
+                label: Specifiche
+                widget: list
+                field: { name: spec, label: Specifica, widget: string }

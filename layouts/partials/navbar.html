@@ -1,0 +1,24 @@
+<header id="nl-nav" class="nl-nav" role="banner">
+  <div class="nl-nav__inner">
+
+    <a href="#top" class="nl-nav__logo-link" aria-label="NOLEGGIA-LO — torna in cima">
+      <span class="nl-logo">Noleggia<span class="nl-logo__dash">-</span>Lo</span>
+    </a>
+
+    <nav aria-label="Navigazione principale">
+      <ul class="nl-nav__links" role="list">
+        <li><a href="#chi-siamo">Chi Siamo</a></li>
+        <li><a href="#furgoni">I Nostri Furgoni</a></li>
+        <li><a href="#perche">Perché Noi</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </nav>
+
+    <a href="{{ .Site.Params.tel | safeURL }}" class="nl-btn nl-btn--orange" aria-label="Chiama ora">
+      <span aria-hidden="true">📞</span>
+      <span class="nl-btn__label-long">Chiama ora</span>
+      <span class="nl-btn__label-short" aria-hidden="true">Chiama</span>
+    </a>
+
+  </div>
+</header>

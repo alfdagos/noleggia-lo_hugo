@@ -1,0 +1,24 @@
+<section id="perche" class="nl-perche" aria-label="Perché sceglierci">
+  <div class="nl-container">
+
+    <div class="nl-section-header">
+      <div class="nl-section-label nl-fade-up">Perché Sceglierci</div>
+      <h2 class="nl-section-title nl-section-title--light nl-fade-up">
+        Semplice, veloce, locale.
+      </h2>
+    </div>
+
+    <div class="nl-perche-grid" role="list">
+      {{ range .Site.Data.perche.items }}
+      <div class="nl-perche-item nl-fade-up" role="listitem">
+        <div class="nl-perche-item__icon" aria-hidden="true">✓</div>
+        <div>
+          <h3 class="nl-perche-item__title">{{ .title }}</h3>
+          <p class="nl-perche-item__desc">{{ .desc }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+  </div>
+</section>

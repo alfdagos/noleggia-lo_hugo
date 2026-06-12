@@ -1,0 +1,888 @@
+/* =============================================================
+   NOLEGGIA-LO — Main Stylesheet
+   Vanilla CSS, no build step required.
+   Organised by: Variables → Reset → Base → Components
+   ============================================================= */
+
+/* ---------------------------------------------------------------
+   1. DESIGN TOKENS
+--------------------------------------------------------------- */
+:root {
+  --navy:       #1C2B4A;
+  --navy-deep:  #15213a;
+  --orange:     #F4611C;
+  --light:      #F5F5F3;
+  --muted:      #6B7280;
+  --gray-body:  #374151;
+  --white:      #ffffff;
+
+  /* Spacing scale (multiples of 4px) */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-7:  1.75rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-14: 3.5rem;
+  --sp-24: 6rem;
+  --sp-32: 8rem;
+
+  /* Border radii */
+  --radius-sm:   0.5rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1rem;
+  --radius-xl:   1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card:  0 10px 30px -15px rgba(28, 43, 74, 0.18);
+  --shadow-hero:  0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  --shadow-map:   0 10px 30px -15px rgba(28, 43, 74, 0.25);
+}
+
+/* ---------------------------------------------------------------
+   2. RESET & BASE
+--------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--white);
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Syne", system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------
+   3. LAYOUT UTILITIES
+--------------------------------------------------------------- */
+.nl-container {
+  max-width: 80rem; /* 1280px — equivalent to max-w-7xl */
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+}
+
+@media (min-width: 640px) {
+  .nl-container {
+    padding-inline: var(--sp-8);
+  }
+}
+
+.nl-section-header {
+  max-width: 48rem; /* 768px — equivalent to max-w-3xl */
+}
+
+/* ---------------------------------------------------------------
+   4. ANIMATIONS
+--------------------------------------------------------------- */
+@keyframes nl-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% { opacity: 1; }
+  50%  { opacity: 0.4; }
+}
+
+.nl-fade-up {
+  opacity: 0;
+}
+
+.nl-fade-up.in-view {
+  animation: nl-fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* Stagger consecutive fade-up siblings */
+.nl-cards     .nl-fade-up:nth-child(2),
+.nl-van-grid  .nl-fade-up:nth-child(2),
+.nl-perche-grid .nl-fade-up:nth-child(2) { animation-delay: 0.08s; }
+.nl-cards     .nl-fade-up:nth-child(3),
+.nl-van-grid  .nl-fade-up:nth-child(3),
+.nl-perche-grid .nl-fade-up:nth-child(3) { animation-delay: 0.16s; }
+.nl-van-grid  .nl-fade-up:nth-child(4),
+.nl-perche-grid .nl-fade-up:nth-child(4) { animation-delay: 0.24s; }
+
+/* ---------------------------------------------------------------
+   5. SHARED BUTTON
+--------------------------------------------------------------- */
+.nl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: filter 0.2s, background-color 0.2s, color 0.2s;
+  padding: 0.625rem var(--sp-4);
+}
+
+@media (min-width: 640px) {
+  .nl-btn { padding: 0.625rem var(--sp-5); }
+}
+
+.nl-btn--lg {
+  padding: 0.875rem var(--sp-6);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .nl-btn--lg { font-size: 1rem; }
+}
+
+/* Orange filled */
+.nl-btn--orange {
+  background-color: var(--orange);
+  color: var(--white);
+  box-shadow: 0 4px 14px -4px rgba(244, 97, 28, 0.45);
+}
+
+.nl-btn--orange:hover {
+  filter: brightness(1.1);
+}
+
+/* White outline (on dark bg) */
+.nl-btn--outline-white {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.nl-btn--outline-white:hover {
+  background-color: var(--white);
+  color: var(--navy);
+  filter: none;
+}
+
+/* Navy outline (on light bg) */
+.nl-btn--outline-navy {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+}
+
+.nl-btn--outline-navy:hover {
+  background-color: var(--navy);
+  color: var(--white);
+  filter: none;
+}
+
+/* ---------------------------------------------------------------
+   6. SHARED TYPOGRAPHY
+--------------------------------------------------------------- */
+.nl-section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--orange);
+}
+
+.nl-section-title {
+  margin-top: var(--sp-4);
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+@media (min-width: 640px) {
+  .nl-section-title { font-size: 3rem; }
+}
+
+.nl-section-title--light {
+  color: var(--white);
+}
+
+/* ---------------------------------------------------------------
+   7. LOGO
+--------------------------------------------------------------- */
+.nl-logo {
+  font-family: "Sansita", system-ui, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  transform: scaleX(1.12);
+  transform-origin: left center;
+  color: var(--white);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .nl-logo { font-size: 2rem; }
+}
+
+.nl-logo--footer {
+  font-size: 1.875rem;
+}
+
+.nl-logo__dash {
+  color: var(--orange);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.nl-nav__logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------------
+   8. NAVBAR
+--------------------------------------------------------------- */
+.nl-nav {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 50;
+  background-color: var(--navy);
+  transition: background-color 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+}
+
+.nl-nav.nl-nav-scrolled {
+  background-color: rgba(28, 43, 74, 0.85) !important;
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  box-shadow: 0 6px 24px -12px rgba(0, 0, 0, 0.35);
+}
+
+.nl-nav__inner {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+
+@media (min-width: 640px) {
+  .nl-nav__inner { padding-inline: var(--sp-8); }
+}
+
+.nl-nav__links {
+  display: none;
+  gap: var(--sp-8);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .nl-nav__links { display: flex; }
+}
+
+.nl-nav__links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s;
+}
+
+.nl-nav__links a:hover {
+  color: var(--white);
+}
+
+/* Responsive CTA label */
+.nl-btn__label-long { display: none; }
+.nl-btn__label-short { display: inline; }
+
+@media (min-width: 640px) {
+  .nl-btn__label-long  { display: inline; }
+  .nl-btn__label-short { display: none; }
+}
+
+/* ---------------------------------------------------------------
+   9. HERO
+--------------------------------------------------------------- */
+.nl-hero {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--navy);
+}
+
+.nl-hero__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 600px at 20% 30%, rgba(244, 97, 28, 0.18), transparent 60%),
+    linear-gradient(180deg, #1c2b4a 0%, #15213a 100%);
+  pointer-events: none;
+}
+
+.nl-hero__grid {
+  position: relative;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+  padding-top: 7rem;
+  padding-bottom: 4rem;
+  width: 100%;
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .nl-hero__grid { padding-inline: var(--sp-8); }
+}
+
+@media (min-width: 1024px) {
+  .nl-hero__grid { grid-template-columns: 1fr 1fr; }
+}
+
+.nl-hero__text {
+  max-width: 36rem;
+}
+
+/* Badge */
+.nl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(244, 97, 28, 0.5);
+  padding: var(--sp-1) var(--sp-3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+}
+
+.nl-badge__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background-color: var(--orange);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
+}
+
+/* Heading */
+.nl-hero h1 {
+  margin-top: var(--sp-6);
+  color: var(--white);
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+@media (min-width: 640px) { .nl-hero h1 { font-size: 3.75rem; } }
+@media (min-width: 1024px) { .nl-hero h1 { font-size: 4.5rem; } }
+
+.nl-hero h1 .accent { color: var(--orange); }
+
+.nl-hero__desc {
+  margin-top: var(--sp-6);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 36rem;
+}
+
+@media (min-width: 640px) {
+  .nl-hero__desc { font-size: 1.125rem; }
+}
+
+.nl-hero__ctas {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+/* Image card */
+.nl-hero__img-wrap {
+  position: relative;
+}
+
+.nl-hero__img-glow {
+  position: absolute;
+  inset: -1.5rem;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(closest-side, rgba(244, 97, 28, 0.25), transparent 70%);
+  pointer-events: none;
+}
+
+.nl-hero__img-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-hero);
+  outline: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .nl-hero__img-card { padding: var(--sp-6); }
+}
+
+.nl-hero__img-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------
+   10. CHI SIAMO
+--------------------------------------------------------------- */
+.nl-chi-siamo {
+  padding-block: var(--sp-24);
+  background-color: var(--light);
+}
+
+@media (min-width: 640px) {
+  .nl-chi-siamo { padding-block: var(--sp-32); }
+}
+
+.nl-chi-siamo__body {
+  margin-top: var(--sp-6);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--gray-body);
+}
+
+@media (min-width: 640px) {
+  .nl-chi-siamo__body { font-size: 1.125rem; }
+}
+
+/* Feature cards */
+.nl-cards {
+  margin-top: var(--sp-14);
+  display: grid;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 768px) {
+  .nl-cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.nl-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s;
+}
+
+.nl-card:hover {
+  transform: translateY(-4px);
+}
+
+.nl-card__icon { font-size: 1.875rem; }
+
+.nl-card__title {
+  margin-top: var(--sp-4);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.nl-card__desc {
+  margin-top: var(--sp-2);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------
+   11. FLOTTA
+--------------------------------------------------------------- */
+.nl-flotta {
+  padding-block: var(--sp-24);
+  background: var(--white);
+}
+
+@media (min-width: 640px) {
+  .nl-flotta { padding-block: var(--sp-32); }
+}
+
+.nl-van-grid {
+  margin-top: var(--sp-14);
+  display: grid;
+  gap: 1.75rem;
+}
+
+@media (min-width: 768px)  { .nl-van-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .nl-van-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.nl-van-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s;
+}
+
+.nl-van-card:hover {
+  transform: translateY(-4px);
+}
+
+.nl-van-card:hover .nl-van-card__img {
+  transform: scale(1.05);
+}
+
+.nl-van-card__img-wrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-3);
+}
+
+.nl-van-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s;
+}
+
+.nl-van-card__body { padding: var(--sp-6); }
+
+.nl-van-card__name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.nl-van-card__specs {
+  margin-top: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.nl-van-card__specs li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.nl-van-card__specs li::before {
+  content: "›";
+  color: var(--orange);
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+
+.nl-van-card__cta {
+  margin-top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--orange);
+  transition: opacity 0.2s;
+}
+
+.nl-van-card__cta:hover { opacity: 0.8; }
+
+.nl-flotta__note {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------
+   12. STRIPE DIVIDER
+--------------------------------------------------------------- */
+.nl-stripe {
+  position: relative;
+  height: 56px;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.nl-stripe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    115deg,
+    var(--orange) 0 80px,
+    transparent 80px 140px
+  );
+  transform: skewY(-2deg);
+}
+
+/* ---------------------------------------------------------------
+   13. PERCHÉ NOI
+--------------------------------------------------------------- */
+.nl-perche {
+  padding-block: var(--sp-24);
+  background-color: var(--navy);
+}
+
+@media (min-width: 640px) {
+  .nl-perche { padding-block: var(--sp-32); }
+}
+
+.nl-perche-grid {
+  margin-top: var(--sp-14);
+  display: grid;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 640px) {
+  .nl-perche-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.nl-perche-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: background-color 0.2s;
+}
+
+.nl-perche-item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.nl-perche-item__icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  display: grid;
+  place-items: center;
+}
+
+.nl-perche-item__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.nl-perche-item__desc {
+  margin-top: var(--sp-1);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------------------------------------------------------------
+   14. CONTATTI
+--------------------------------------------------------------- */
+.nl-contatti {
+  padding-block: var(--sp-24);
+  background-color: var(--light);
+}
+
+@media (min-width: 640px) {
+  .nl-contatti { padding-block: var(--sp-32); }
+}
+
+.nl-contatti__inner {
+  max-width: 64rem; /* max-w-5xl */
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .nl-contatti__inner { padding-inline: var(--sp-8); }
+}
+
+.nl-phone-link {
+  display: block;
+  margin-top: var(--sp-10);
+  font-family: "Syne", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  transition: opacity 0.2s;
+}
+
+@media (min-width: 640px) {
+  .nl-phone-link { font-size: 4.5rem; }
+}
+
+.nl-phone-link:hover { opacity: 0.8; }
+
+.nl-contatti__sub {
+  margin-top: var(--sp-4);
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.nl-contatti__ctas {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-3);
+}
+
+.nl-contatti__address {
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.nl-map-wrap {
+  margin-top: var(--sp-8);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-map);
+}
+
+.nl-map-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 360px;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------
+   15. FOOTER
+--------------------------------------------------------------- */
+.nl-footer {
+  background-color: var(--navy-deep);
+  color: var(--white);
+}
+
+.nl-footer__inner {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+  padding-block: 3.5rem;
+}
+
+@media (min-width: 640px) {
+  .nl-footer__inner { padding-inline: var(--sp-8); }
+}
+
+.nl-footer__grid {
+  display: grid;
+  gap: var(--sp-8);
+}
+
+@media (min-width: 768px) {
+  .nl-footer__grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
+
+.nl-footer__tagline {
+  margin-top: var(--sp-3);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.nl-footer__col-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.nl-footer__col-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin-top: var(--sp-2);
+}
+
+.nl-footer__col-links a {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s;
+}
+
+.nl-footer__col-links a:hover { color: var(--white); }
+
+.nl-footer__col-text {
+  margin-top: var(--sp-2);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+}
+
+.nl-footer__bottom {
+  margin-top: 2.5rem;
+  padding-top: var(--sp-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}

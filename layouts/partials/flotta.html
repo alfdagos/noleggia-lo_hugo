@@ -1,0 +1,42 @@
+<section id="furgoni" class="nl-flotta" aria-label="La nostra flotta">
+  <div class="nl-container">
+
+    <div class="nl-section-header">
+      <div class="nl-section-label nl-fade-up">La Nostra Flotta</div>
+      <h2 class="nl-section-title nl-fade-up">Furgoni cargo per ogni necessità.</h2>
+    </div>
+
+    <div class="nl-van-grid" role="list">
+      {{ range .Site.Data.vans.items }}
+      <article class="nl-van-card nl-fade-up" role="listitem">
+        <div class="nl-van-card__img-wrap">
+          <img
+            class="nl-van-card__img"
+            src="{{ .image }}"
+            alt="{{ .name }} — furgone NOLEGGIA-LO a Chieti"
+            loading="lazy"
+            width="600"
+            height="450"
+          />
+        </div>
+        <div class="nl-van-card__body">
+          <h3 class="nl-van-card__name">{{ .name }}</h3>
+          <ul class="nl-van-card__specs" aria-label="Specifiche {{ .name }}">
+            {{ range .specs }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          <a href="{{ $.Site.Params.tel | safeURL }}" class="nl-van-card__cta">
+            Chiedi disponibilità →
+          </a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+
+    <p class="nl-flotta__note nl-fade-up">
+      Flotta in fase di aggiornamento — contattaci per conoscere i mezzi disponibili oggi.
+    </p>
+
+  </div>
+</section>

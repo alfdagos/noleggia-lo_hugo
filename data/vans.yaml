@@ -1,0 +1,21 @@
+items:
+  - name: Vista Laterale
+    image: /images/furgone-laterale.jpg
+    specs:
+      - "VW Crafter passo lungo"
+      - "Tetto alto · Volume ~ 14 m³"
+      - "Patente B"
+
+  - name: Vista Posteriore
+    image: /images/furgone-retro.jpg
+    specs:
+      - "Doppia porta posteriore"
+      - "Carico facile a terra"
+      - "GPS Protected"
+
+  - name: Vista Completa
+    image: /images/furgone-vista-completa.jpg
+    specs:
+      - "Brandizzato NOLEGGIA-LO"
+      - "Mezzo nuovo e curato"
+      - "Pronto al noleggio"

@@ -1,0 +1,29 @@
+baseURL = "https://noleggia-lo.it/"
+languageCode = "it-IT"
+title = "NOLEGGIA-LO | Noleggio Furgoni Cargo a Chieti"
+enableRobotsTXT = true
+enableGitInfo = false
+summaryLength = 70
+
+[params]
+  description  = "Noleggio furgoni cargo a Brecciarola di Chieti, Abruzzo. Pratici, affidabili, pronti quando serve."
+  phone        = "350 506 4929"
+  tel          = "tel:3505064929"
+  whatsapp     = "https://wa.me/393505064929"
+  ogImage      = "/images/og-image.jpg"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority   = 0.5
+  filename   = "sitemap.xml"
+
+[minify]
+  disableCSS  = false
+  disableHTML = false
+  disableJS   = false
+
+[build]
+  writeStats = false
