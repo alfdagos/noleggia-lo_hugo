@@ -1,4 +1,5 @@
-baseURL = "https://noleggia-lo.it/"
+#baseURL = "https://www.noleggia-lo.it/"
+baseURL = "https://alfdagos.github.io/noleggia-lo_hugo/"
 languageCode = "it-IT"
 title = "NOLEGGIA-LO | Noleggio Furgoni Cargo a Chieti"
 enableRobotsTXT = true
